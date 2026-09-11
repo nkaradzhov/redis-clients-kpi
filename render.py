@@ -39,7 +39,7 @@ def table(df, drop=()):
     return df.to_html(index=False, escape=False, border=0, classes="stats")
 
 
-def render(cfg, repos, out_dir="site"):
+def render(cfg, repos, out_dir="site", data_dir=None):
     env = Environment(
         loader=FileSystemLoader(os.path.join(os.path.dirname(os.path.abspath(__file__)), "templates")),
         autoescape=False,
@@ -93,3 +93,12 @@ def render(cfg, repos, out_dir="site"):
     }
     with open(os.path.join(out_dir, "data.json"), "w") as f:
         json.dump(data, f, indent=2, default=str)
+
+    # committed snapshot: no timestamp inside, so the git diff shows only
+    # real data changes and git history is the time series
+    if data_dir:
+        os.makedirs(data_dir, exist_ok=True)
+        snapshot = {"quarter": cfg["quarter_label"], "summaries": data["summaries"]}
+        with open(os.path.join(data_dir, "latest.json"), "w") as f:
+            json.dump(snapshot, f, indent=2, default=str, sort_keys=True)
+            f.write("\n")

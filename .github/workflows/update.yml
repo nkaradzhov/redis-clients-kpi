@@ -8,7 +8,7 @@ on:
     branches: [main] # rebuild when config or code changes
 
 permissions:
-  contents: read
+  contents: write # the daily run commits data/latest.json
   pages: write
   id-token: write
 
@@ -33,6 +33,20 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python run.py
+
+      - name: Commit data snapshot
+        # git history of data/latest.json is the daily time series.
+        # [skip ci] stops this push from re-triggering the workflow.
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          if git diff --cached --quiet; then
+            echo "Data unchanged, nothing to commit"
+          else
+            git commit -m "data: daily KPI snapshot [skip ci]"
+            git push
+          fi
 
       - uses: actions/upload-pages-artifact@v3
         with:

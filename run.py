@@ -18,8 +18,8 @@ def main():
     repos = collect(cfg)
     print(f"Collected {len(repos)} repo(s) in {time.perf_counter() - t0:.1f}s")
 
-    render(cfg, repos, out_dir=os.path.join(HERE, "site"))
-    print("Wrote site/index.html and site/data.json")
+    render(cfg, repos, out_dir=os.path.join(HERE, "site"), data_dir=os.path.join(HERE, "data"))
+    print("Wrote site/index.html, site/data.json, and data/latest.json")
 
 
 if __name__ == "__main__":

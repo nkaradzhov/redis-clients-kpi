@@ -12,8 +12,9 @@ GitHub Pages site, rebuilt every day by a GitHub Action.
   response, waiting times, interactions, and the untriaged backlog.
 - `render.py` writes a static HTML page plus `data.json` into `site/`.
 - `.github/workflows/update.yml` runs daily at 06:00 UTC, on every push to
-  `main`, and on demand from the Actions tab. It deploys `site/` to
-  GitHub Pages.
+  `main`, and on demand from the Actions tab. It commits the day's numbers
+  to `data/latest.json` (git-scraping style: the file's git history is the
+  daily time series) and deploys `site/` to GitHub Pages.
 
 The reporting quarter is computed automatically (Redis fiscal year starts
 Feb 1: Q1 Feb–Apr, Q2 May–Jul, Q3 Aug–Oct, Q4 Nov–Jan). Pin a fixed period
