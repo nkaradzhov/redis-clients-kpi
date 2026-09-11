@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Redis Clients — Community KPI Report</title>
+<style>
+  :root { --border: #d0d7de; --muted: #57606a; --accent: #0969da; --warn: #fff8c5; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+         margin: 0 auto; max-width: 1200px; padding: 24px; color: #1f2328; }
+  h1 { border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+  h2 { margin-top: 40px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  .meta { color: var(--muted); }
+  table.stats { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 14px; }
+  table.stats th, table.stats td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; }
+  table.stats th { background: #f6f8fa; }
+  table.stats tr:nth-child(even) { background: #fafbfc; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .cards { display: flex; flex-wrap: wrap; gap: 12px; margin: 16px 0; }
+  .card { border: 1px solid var(--border); border-radius: 8px; padding: 10px 16px; min-width: 130px; }
+  .card .num { font-size: 26px; font-weight: 600; }
+  .card .label { color: var(--muted); font-size: 12px; }
+  .detractor { background: var(--warn); border: 1px solid #d4a72c66; border-radius: 8px; padding: 4px 16px 12px; margin: 16px 0; }
+  details { margin: 12px 0; }
+  summary { cursor: pointer; font-weight: 600; padding: 4px 0; }
+  .none { color: var(--muted); font-style: italic; }
+</style>
+</head>
+<body>
+
+<h1>Redis Clients — Community KPI Report</h1>
+<p class="meta">
+  Quarter <strong>{{ quarter }}</strong> ({{ start }} — {{ end }}) ·
+  Generated {{ generated }} ·
+  Community items only: maintainer and bot activity is excluded.
+</p>
+
+<h2>Summary</h2>
+{{ summary_table }}
+
+{% for repo in repos %}
+<h2>{{ repo.name }}</h2>
+
+<div class="cards">
+  <div class="card"><div class="num">{{ repo.summary["Opened PRs"] }}</div><div class="label">PRs opened</div></div>
+  <div class="card"><div class="num">{{ repo.summary["Merged PRs"] }}</div><div class="label">PRs merged</div></div>
+  <div class="card"><div class="num">{{ repo.summary["Opened Issues"] }}</div><div class="label">Issues opened</div></div>
+  <div class="card"><div class="num">{{ repo.summary["Closed Issues"] }}</div><div class="label">Issues closed</div></div>
+  <div class="card"><div class="num">{{ repo.summary["PRs Response Time (h, p85)"] }}</div><div class="label">PR response h (p85)</div></div>
+  <div class="card"><div class="num">{{ repo.summary["Issues Response Time (h, p85)"] }}</div><div class="label">Issue response h (p85)</div></div>
+  <div class="card"><div class="num">{{ repo.summary["Backlog of Untriaged Issues"] }}</div><div class="label">Untriaged backlog</div></div>
+  <div class="card"><div class="num">{{ repo.summary["Interactions"] }}</div><div class="label">Interactions</div></div>
+</div>
+
+<div class="detractor">
+  <h3>Needs attention</h3>
+
+  <h4>Unanswered issues</h4>
+  {% if repo.detractors.issues_unanswered %}{{ repo.detractors.issues_unanswered }}
+  {% else %}<p class="none">None — every issue has a first response.</p>{% endif %}
+
+  <h4>Unanswered PRs</h4>
+  {% if repo.detractors.prs_unanswered %}{{ repo.detractors.prs_unanswered }}
+  {% else %}<p class="none">None — every PR has a first response.</p>{% endif %}
+
+  <h4>Slow first responses (&gt;{{ threshold }}h)</h4>
+  {% if repo.detractors.issues_slow %}<h5>Issues</h5>{{ repo.detractors.issues_slow }}{% endif %}
+  {% if repo.detractors.prs_slow %}<h5>PRs</h5>{{ repo.detractors.prs_slow }}{% endif %}
+  {% if not repo.detractors.issues_slow and not repo.detractors.prs_slow %}
+  <p class="none">None — all first responses under {{ threshold }}h.</p>{% endif %}
+</div>
+
+<details>
+  <summary>Issues opened this quarter ({{ repo.summary["Opened Issues"] }})</summary>
+  {% if repo.issues %}{{ repo.issues }}{% else %}<p class="none">None.</p>{% endif %}
+</details>
+
+<details>
+  <summary>PRs opened this quarter ({{ repo.summary["Opened PRs"] }})
+    — reviews: {{ repo.counters.get("reviewed", 0) }},
+    changes requested: {{ repo.counters.get("requested_changes", 0) }},
+    approvals: {{ repo.counters.get("approved", 0) }}</summary>
+  {% if repo.open_prs %}{{ repo.open_prs }}{% else %}<p class="none">None.</p>{% endif %}
+  {% if repo.docs_open %}<h4>Docs team PRs open</h4>{{ repo.docs_open }}{% endif %}
+</details>
+
+<details>
+  <summary>PRs closed this quarter ({{ repo.summary["Closed PRs"] }})
+    — reviews: {{ repo.closed_counters.get("reviewed", 0) }},
+    changes requested: {{ repo.closed_counters.get("requested_changes", 0) }},
+    approvals: {{ repo.closed_counters.get("approved", 0) }}</summary>
+  {% if repo.closed_prs %}{{ repo.closed_prs }}{% else %}<p class="none">None.</p>{% endif %}
+</details>
+
+<details>
+  <summary>Discussions ({{ repo.summary["Opened Discussions"] }})</summary>
+  {% if repo.discussions %}{{ repo.discussions }}{% else %}<p class="none">None this quarter.</p>{% endif %}
+</details>
+
+<details>
+  <summary>Untriaged backlog ({{ repo.summary["Backlog of Untriaged Issues"] }})</summary>
+  {% if repo.backlog %}{{ repo.backlog }}{% else %}<p class="none">Empty.</p>{% endif %}
+</details>
+{% endfor %}
+
+<p class="meta">
+  Data: GitHub API · Maintainer lists and repos are defined in
+  <a href="https://github.com/OWNER/REPO/blob/main/config.yaml">config.yaml</a> — PRs welcome.
+</p>
+
+</body>
+</html>

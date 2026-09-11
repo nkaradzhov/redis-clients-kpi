@@ -1,0 +1,65 @@
+# KPI dashboard configuration.
+# To add or remove a maintainer or repository, edit this file and open a PR.
+
+repos:
+  - redis/node-redis
+
+# Maintainers: their issues/PRs are excluded from the community stats,
+# and their comments/reviews count as team responses.
+maintainers:
+  # Cross-team
+  - bobymicroby
+  - dmaier-redislabs
+  - kiryazovi-redis
+  # ent team
+  - uglide
+  - atakavci
+  - tishun
+  - ggivo
+  - StefanPalashev
+  - a-TODO-rov
+  - mgravell
+  - vchomakov
+  # community team
+  - elena-kolevska
+  - vladvildanov
+  - ofekshenawa
+  - ndyakov
+  - petyaslavova
+  - htemelski
+  - htemelski-redis
+  - nkaradzhov
+  - PavelPashov
+  - Copilot
+
+# External maintainers: excluded from community stats, but their responses
+# do not count as team responses.
+external_maintainers:
+  # MSFT contributors
+  - philon-msft
+  - NickCraver
+  # AWS/ValKey/redis-rs
+  - nihohit
+  # Relay
+  - tillkruss
+  - yatsukhnenko
+  # Spring
+  - mp911de
+
+docs_team:
+  - andy-stark-redis
+  - dwdougherty
+
+# Reporting period. Leave start/end empty to track the current Redis fiscal
+# quarter automatically (FY starts Feb 1: Q1 Feb-Apr, Q2 May-Jul,
+# Q3 Aug-Oct, Q4 Nov-Jan). Set both to pin a fixed period, e.g.:
+#   start: 2026-05-01
+#   end: 2026-08-01
+#   label: Q2FY27
+quarter:
+  start:
+  end:
+  label:
+
+# Items whose first response took longer than this count as detractors.
+slow_threshold_hours: 48
