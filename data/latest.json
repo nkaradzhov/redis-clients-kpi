@@ -15,7 +15,7 @@
       "Opened Issues": 12,
       "Opened PRs": 61,
       "PRs Response Time (h, p85)": 22.16,
-      "PRs Waiting Time (h, p85)": 21.55,
+      "PRs Waiting Time (h, p85)": 25.6,
       "Repository": "redis/node-redis"
     }
   ]
