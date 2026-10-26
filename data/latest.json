@@ -7,15 +7,15 @@
       "Closed Issues": 22,
       "Closed PRs": 103,
       "Discussions Response Time (h, p85)": null,
-      "Interactions": 213,
-      "Issues Response Time (h, p85)": 25.5,
+      "Interactions": 218,
+      "Issues Response Time (h, p85)": 27.61,
       "Issues Waiting Time (h, p85)": 27.61,
       "Merged PRs": 82,
       "Opened Discussions": 0,
       "Opened Issues": 25,
       "Opened PRs": 104,
-      "PRs Response Time (h, p85)": 27.57,
-      "PRs Waiting Time (h, p85)": 30.88,
+      "PRs Response Time (h, p85)": 33.77,
+      "PRs Waiting Time (h, p85)": 33.77,
       "Repository": "redis/node-redis"
     }
   ]
