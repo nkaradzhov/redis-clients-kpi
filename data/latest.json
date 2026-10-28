@@ -2,20 +2,20 @@
   "quarter": "Q3FY27",
   "summaries": [
     {
-      "Backlog of Untriaged Issues": 3,
+      "Backlog of Untriaged Issues": 2,
       "Closed Discussions": 0,
-      "Closed Issues": 23,
-      "Closed PRs": 104,
+      "Closed Issues": 24,
+      "Closed PRs": 110,
       "Discussions Response Time (h, p85)": null,
-      "Interactions": 220,
-      "Issues Response Time (h, p85)": 27.61,
-      "Issues Waiting Time (h, p85)": 27.61,
-      "Merged PRs": 83,
+      "Interactions": 227,
+      "Issues Response Time (h, p85)": 26.94,
+      "Issues Waiting Time (h, p85)": 26.94,
+      "Merged PRs": 88,
       "Opened Discussions": 0,
-      "Opened Issues": 25,
-      "Opened PRs": 106,
-      "PRs Response Time (h, p85)": 33.77,
-      "PRs Waiting Time (h, p85)": 32.53,
+      "Opened Issues": 26,
+      "Opened PRs": 110,
+      "PRs Response Time (h, p85)": 31.91,
+      "PRs Waiting Time (h, p85)": 31.02,
       "Repository": "redis/node-redis"
     }
   ]
