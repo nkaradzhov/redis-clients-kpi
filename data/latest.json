@@ -4,18 +4,18 @@
     {
       "Backlog of Untriaged Issues": 2,
       "Closed Discussions": 0,
-      "Closed Issues": 11,
-      "Closed PRs": 46,
+      "Closed Issues": 12,
+      "Closed PRs": 49,
       "Discussions Response Time (h, p85)": null,
-      "Interactions": 64,
-      "Issues Response Time (h, p85)": 50.82,
+      "Interactions": 70,
+      "Issues Response Time (h, p85)": 45.7,
       "Issues Waiting Time (h, p85)": 45.7,
-      "Merged PRs": 30,
+      "Merged PRs": 31,
       "Opened Discussions": 0,
       "Opened Issues": 14,
-      "Opened PRs": 47,
-      "PRs Response Time (h, p85)": 55.95,
-      "PRs Waiting Time (h, p85)": 48.68,
+      "Opened PRs": 56,
+      "PRs Response Time (h, p85)": 48.68,
+      "PRs Waiting Time (h, p85)": 44.31,
       "Repository": "redis/node-redis"
     }
   ]
