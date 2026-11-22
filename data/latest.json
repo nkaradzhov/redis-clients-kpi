@@ -2,7 +2,7 @@
   "quarter": "Q4FY27",
   "summaries": [
     {
-      "Backlog of Untriaged Issues": 2,
+      "Backlog of Untriaged Issues": 1,
       "Closed Discussions": 0,
       "Closed Issues": 12,
       "Closed PRs": 49,
@@ -13,9 +13,9 @@
       "Merged PRs": 31,
       "Opened Discussions": 0,
       "Opened Issues": 14,
-      "Opened PRs": 56,
+      "Opened PRs": 60,
       "PRs Response Time (h, p85)": 48.68,
-      "PRs Waiting Time (h, p85)": 44.31,
+      "PRs Waiting Time (h, p85)": 44.46,
       "Repository": "redis/node-redis"
     }
   ]
